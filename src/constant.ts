@@ -13,4 +13,4 @@ export const exerciseValidationErrors = {
   invalidDateForamt: 'Invalid date format',
 } as const;
 
-export type ErrorMessage = { message: string } | '';
+export type ErrorMessage = { message: string };
