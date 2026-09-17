@@ -5,6 +5,7 @@ import { ExerciseModel } from '../models/exercise.ts';
 import { UserExerciseLogResponseDto } from '../dtos/userExerciseLog.ts';
 import { UserDto } from '../dtos/user.ts';
 import { validateUsername } from '../validators/user.ts';
+import { validateUserExercisesLogsLimit } from '../validators/userExercisesLogs.ts';
 
 import type { IUser } from '../Interfaces/index.ts';
 
@@ -13,16 +14,27 @@ class UserService {
     return await UserModel.getAll();
   }
 
-  async getUserExercisesLogs(userId: number): Promise<UserExerciseLogResponseDto> {
+  async getUserExercisesLogs(
+    userId: number,
+    limit: number | null,
+  ): Promise<UserExerciseLogResponseDto> {
+    const limitValidationError = validateUserExercisesLogsLimit(limit);
+
+    if (limitValidationError) {
+      console.log('User validation error :', limitValidationError.message);
+      throw ApiError.badRequest(limitValidationError.message);
+    }
+
     const user = await UserModel.findById(userId);
+
     if (!user) {
       console.log('User validation error :', userValidationErrors.userNotFound);
       throw ApiError.badRequest(userValidationErrors.userNotFound);
     }
 
     const exerciseData = await ExerciseModel.getUserExercisesLogs(userId);
-    const userExercisesLogs = new UserExerciseLogResponseDto(user, exerciseData);
 
+    const userExercisesLogs = new UserExerciseLogResponseDto(user, exerciseData, limit);
     return userExercisesLogs;
   }
 

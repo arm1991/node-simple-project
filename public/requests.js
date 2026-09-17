@@ -34,7 +34,7 @@ export async function getAllExercises() {
 export async function getUserExercisesLogs() {
   try {
     const id = parseInt(document.getElementById('logsUserId').value);
-    const res = await get(`/users/${id}/logs`);
+    const res = await get(`/users/${id}/logs?limit=${document.getElementById('logsLimit').value}`);
     const data = await res.json();
 
     if (!res.ok) {
@@ -43,7 +43,8 @@ export async function getUserExercisesLogs() {
 
     console.table(data);
   } catch (error) {
-    console.error('Error fetching exercises:', error);
+    displayError('userExercisesLogsError', error.message);
+    console.error('Error fetching user exercises logs:', error);
   }
 }
 

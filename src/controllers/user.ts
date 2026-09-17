@@ -18,7 +18,8 @@ class UserController {
   async getUserExercisesLogs(req: Request, res: Response, next: NextFunction) {
     try {
       const userId = Number(req.params.id);
-      const userExercisesLogs = await userService.getUserExercisesLogs(userId);
+      const limit = req.query.limit ? Number(req.query.limit) : null;
+      const userExercisesLogs = await userService.getUserExercisesLogs(userId, limit);
 
       res.json(userExercisesLogs);
     } catch (e) {

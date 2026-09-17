@@ -46,7 +46,9 @@
         <h2>Get User exercises Logs</h2>
         <p><code>GET /api/users/:id/logs</code></p>
         <input type="text" id="logsUserId" name=":id" placeholder=":id" />
+        <input type="number" id="logsLimit" name="limit" placeholder="limit" />
         <button id="getUserExercisesLogs">Get User Exercises Logs</button>
+        <span id="userExercisesLogsError" class="error"></span>
       </form>
       <p>
         <strong>GET user's exercise log: </strong>
