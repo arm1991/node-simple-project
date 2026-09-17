@@ -8,19 +8,10 @@ import type { NextFunction, Request, Response } from 'express';
 class ExerciseController {
   async create(req: Request, res: Response, next: NextFunction) {
     try {
-      const userIdFromParams = Number(req.params.id);
-      const { description, duration, date } = req.body;
-      const userId = userIdFromParams;
-      const exerciseValidationError = validateExercise({ description, userId, duration, date });
+      const userId = Number(req.params.id);
+      const { description, duration, limit } = req.body;
 
-      if (exerciseValidationError) {
-        console.log('Invalid params for creating exercise');
-        return next(ApiError.badRequest(exerciseValidationError.message));
-      }
-
-      // creating exercise
-      const exercise = new ExerciseDto({ description, userId, duration, date });
-      const exerciseData = await exerciseService.create(exercise);
+      const exerciseData = await exerciseService.create({ description, userId, duration, limit });
 
       res.json(exerciseData);
       console.log('exercise created', exerciseData);

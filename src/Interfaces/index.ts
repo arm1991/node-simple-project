@@ -8,7 +8,7 @@ export interface IExercise {
   userId: number;
   description: string;
   duration: number;
-  date?: string;
+  limit?: string;
 }
 
 export interface IUserExerciseLog extends IUser {

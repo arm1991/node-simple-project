@@ -10,16 +10,7 @@ class UserController {
   async create(req: Request, res: Response, next: NextFunction) {
     try {
       const { username } = req.body;
-      const userValidationError = validateUsername({ username });
-
-      if (userValidationError) {
-        console.log('Invalid params for creating user :', username);
-        return next(ApiError.badRequest(userValidationError.message));
-      }
-
-      // creating user
-      const user = new UserDto({ username });
-      const userData = await userService.create(user);
+      const userData = await userService.create(username);
 
       res.json(userData);
       console.log('user created', username);

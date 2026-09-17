@@ -2,19 +2,29 @@ import { ApiError } from '../exceptions/apiError.ts';
 import { ExerciseModel } from '../models/exercise.ts';
 
 import type { IExercise, IUser } from '../Interfaces/index.ts';
-import type { CreateExerciseDTO } from '../dtos/exercise.ts';
+import { ExerciseDto, type CreateExerciseDTO } from '../dtos/exercise.ts';
 import { UserModel } from '../models/user.ts';
 import { exerciseValidationErrors } from '../constant.ts';
+import { validateExercise } from '../validators/exercise.ts';
 
 class ExerciseService {
   async create(exercise: CreateExerciseDTO): Promise<IExercise> {
-    const user = await UserModel.findById(exercise.userId);
+    const exerciseValidationError = validateExercise(exercise);
+
+    if (exerciseValidationError) {
+      console.log('Exercise validation error :', 'Invalid params for creating exercise');
+      throw ApiError.badRequest(exerciseValidationError.message);
+    }
+
+    const exerciseDto = new ExerciseDto(exercise);
+    const user = await UserModel.findById(exerciseDto.userId);
+
     if (!user) {
+      console.log('Exercise validation error :', exerciseValidationErrors.userNotFound);
       throw ApiError.badRequest(exerciseValidationErrors.userNotFound);
     }
 
-    const ExerciseData = await ExerciseModel.create(exercise);
-
+    const ExerciseData = await ExerciseModel.create(exerciseDto);
     return ExerciseData;
   }
 

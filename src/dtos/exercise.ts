@@ -8,14 +8,14 @@ export class ExerciseDto implements CreateExerciseDTO {
   description: string;
   userId: number;
   duration: number;
-  date: string;
+  limit: string;
 
   constructor(model: CreateExerciseDTO) {
     this.description = model.description;
     this.userId = model.userId;
     this.duration = model.duration;
 
-    const date = model.date || formatToYYYYMMDD();
-    this.date = date;
+    const limit = model.limit || formatToYYYYMMDD();
+    this.limit = limit;
   }
 }
