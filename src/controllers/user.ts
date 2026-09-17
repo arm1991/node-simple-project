@@ -1,8 +1,4 @@
-import { userValidationErrors } from '../constant.ts';
-import { UserDto } from '../dtos/user.ts';
-import { ApiError } from '../exceptions/apiError.ts';
 import { userService } from '../services/user.ts';
-import { validateUsername } from '../validators/user.ts';
 
 import type { NextFunction, Request, Response } from 'express';
 
@@ -14,6 +10,17 @@ class UserController {
 
       res.json(userData);
       console.log('user created', username);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async getUserExercisesLogs(req: Request, res: Response, next: NextFunction) {
+    try {
+      const userId = Number(req.params.id);
+      const userExercisesLogs = await userService.getUserExercisesLogs(userId);
+
+      res.json(userExercisesLogs);
     } catch (e) {
       next(e);
     }

@@ -1,13 +1,29 @@
 import { ApiError } from '../exceptions/apiError.ts';
 import { UserModel } from '../models/user.ts';
-
-import type { IUser } from '../Interfaces/index.ts';
+import { userValidationErrors } from '../constant.ts';
+import { ExerciseModel } from '../models/exercise.ts';
+import { UserExerciseLogResponseDto } from '../dtos/userExerciseLog.ts';
 import { UserDto } from '../dtos/user.ts';
 import { validateUsername } from '../validators/user.ts';
+
+import type { IUser } from '../Interfaces/index.ts';
 
 class UserService {
   async getAll() {
     return await UserModel.getAll();
+  }
+
+  async getUserExercisesLogs(userId: number): Promise<UserExerciseLogResponseDto> {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      console.log('User validation error :', userValidationErrors.userNotFound);
+      throw ApiError.badRequest(userValidationErrors.userNotFound);
+    }
+
+    const exerciseData = await ExerciseModel.getUserExercisesLogs(userId);
+    const userExercisesLogs = new UserExerciseLogResponseDto(user, exerciseData);
+
+    return userExercisesLogs;
   }
 
   async create(username: string): Promise<IUser> {

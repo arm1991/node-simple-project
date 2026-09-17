@@ -46,6 +46,6 @@ router.get('/users/exercises', exerciseController.getAll);
  * You can add from, to and limit query parameters to a /api/users/:_id/logs request to retrieve part of the
  * log of any user from and to are dates in YYYY-MM-DD format. limit is an integer of how many logs to send back.
  */
-// router.get("/users/:_id/logs", userController.getExerciseLogs);
+router.get('/users/:id/logs', userController.getUserExercisesLogs);
 
 export { router };

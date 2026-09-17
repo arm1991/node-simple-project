@@ -8,8 +8,8 @@ export class ApiError extends Error {
     this.errors = errors;
   }
 
-  static notFound() {
-    return new ApiError(404, 'User not found!');
+  static notFound(message: string) {
+    return new ApiError(404, message ?? 'Not found!');
   }
 
   static badRequest(message: string, errors: any[] = []) {

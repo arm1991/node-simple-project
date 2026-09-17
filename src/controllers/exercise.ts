@@ -1,7 +1,4 @@
-import { ExerciseDto } from '../dtos/exercise.ts';
-import { ApiError } from '../exceptions/apiError.ts';
 import { exerciseService } from '../services/exercise.ts';
-import { validateExercise } from '../validators/exercise.ts';
 
 import type { NextFunction, Request, Response } from 'express';
 
@@ -9,9 +6,9 @@ class ExerciseController {
   async create(req: Request, res: Response, next: NextFunction) {
     try {
       const userId = Number(req.params.id);
-      const { description, duration, limit } = req.body;
+      const { description, duration, date } = req.body;
 
-      const exerciseData = await exerciseService.create({ description, userId, duration, limit });
+      const exerciseData = await exerciseService.create({ description, userId, duration, date });
 
       res.json(exerciseData);
       console.log('exercise created', exerciseData);

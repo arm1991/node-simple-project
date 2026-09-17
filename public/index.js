@@ -1,8 +1,15 @@
-import { createUser, getAllUsers, createExercise, getAllExercises } from './requests.js';
+import {
+  createUser,
+  getAllUsers,
+  createExercise,
+  getAllExercises,
+  getUserExercisesLogs,
+} from './requests.js';
 import { clearError } from './utils.js';
 
 const getAllUsersBtn = document.getElementById('getAllUsers');
 const getAllExercisesBtn = document.getElementById('getAllExercises');
+const getUserExercisesLogsBtn = document.getElementById('getUserExercisesLogs');
 const createUserBtn = document.getElementById('createUser');
 const createExerciseBtn = document.getElementById('createExercise');
 const forms = document.querySelectorAll('form');
@@ -13,6 +20,10 @@ getAllUsersBtn.addEventListener('click', () => {
 
 getAllExercisesBtn.addEventListener('click', () => {
   getAllExercises();
+});
+
+getUserExercisesLogsBtn.addEventListener('click', () => {
+  getUserExercisesLogs();
 });
 
 createUserBtn.addEventListener('click', () => {

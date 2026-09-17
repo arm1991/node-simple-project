@@ -17,7 +17,7 @@ export async function initDb(): Promise<Database> {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       description TEXT NOT NULL,
       duration INTEGER NOT NULL,
-      date TEXT NOT NULL,
+      date TEXT,
       userId INTEGER NOT NULL,
       FOREIGN KEY (userId) REFERENCES users(id)
     );

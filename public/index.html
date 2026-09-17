@@ -42,6 +42,12 @@
         <p><code>GET /api/exercises</code></p>
         <button id="getAllExercises">Get Exercises</button>
       </form>
+      <form>
+        <h2>Get User exercises Logs</h2>
+        <p><code>GET /api/users/:id/logs</code></p>
+        <input type="text" id="logsUserId" name=":id" placeholder=":id" />
+        <button id="getUserExercisesLogs">Get User Exercises Logs</button>
+      </form>
       <p>
         <strong>GET user's exercise log: </strong>
         <code>GET /api/users/:id/logs?[from][&amp;to][&amp;limit]</code>

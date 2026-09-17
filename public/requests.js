@@ -31,6 +31,22 @@ export async function getAllExercises() {
   }
 }
 
+export async function getUserExercisesLogs() {
+  try {
+    const id = parseInt(document.getElementById('logsUserId').value);
+    const res = await get(`/users/${id}/logs`);
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message || 'Something went wrong');
+    }
+
+    console.table(data);
+  } catch (error) {
+    console.error('Error fetching exercises:', error);
+  }
+}
+
 export async function createUser() {
   try {
     const res = await post('/users', { username: document.getElementById('username').value });
