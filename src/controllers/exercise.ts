@@ -8,7 +8,9 @@ import type { NextFunction, Request, Response } from 'express';
 class ExerciseController {
   async create(req: Request, res: Response, next: NextFunction) {
     try {
-      const { description, userId, duration, date } = req.body;
+      const userIdFromParams = Number(req.params.id);
+      const { description, duration, date } = req.body;
+      const userId = userIdFromParams;
       const exerciseValidationError = validateExercise({ description, userId, duration, date });
 
       if (exerciseValidationError) {

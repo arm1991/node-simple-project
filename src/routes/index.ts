@@ -25,9 +25,8 @@ router.get('/users', userController.getAll);
  * user id and newly added exercise fields (id, duration, description and the date). If a required parameter is missing
  * or incorrect, the expected response would be an error with code 400 and an explanation what exactly is wrong.
  * */
-// router.post('/users/:id/exercises', exerciseController.create);
-router.post('/exercises', exerciseController.create);
-router.get('/exercises', exerciseController.getAll);
+router.post('/users/:id/exercises', exerciseController.create);
+router.get('/users/exercises', exerciseController.getAll);
 
 /**
  * You can make a GET request to /api/users/:_id/logs to retrieve a full exercise log of any user.

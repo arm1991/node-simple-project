@@ -18,7 +18,7 @@ export async function getAllUsers() {
 
 export async function getAllExercises() {
   try {
-    const res = await get('/exercises');
+    const res = await get('/users/exercises');
     const data = await res.json();
 
     if (!res.ok) {
@@ -50,10 +50,9 @@ export async function createUser() {
 
 export async function createExercise() {
   try {
-    // const id = parseInt(document.getElementById('userId').value)
-    const res = await post(`/exercises`, {
+    const id = parseInt(document.getElementById('userId').value);
+    const res = await post(`/users/${id}/exercises`, {
       description: document.getElementById('description').value,
-      userId: parseInt(document.getElementById('userId').value),
       duration: parseInt(document.getElementById('duration').value),
       date: document.getElementById('date').value,
     });
