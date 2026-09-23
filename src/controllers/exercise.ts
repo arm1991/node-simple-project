@@ -8,7 +8,12 @@ class ExerciseController {
       const userId = Number(req.params.id);
       const { description, duration, date } = req.body;
 
-      const exerciseData = await exerciseService.create({ description, userId, duration, date });
+      const exerciseData = await exerciseService.create({
+        description,
+        userId,
+        duration: Number(duration),
+        date,
+      });
 
       res.json(exerciseData);
       console.log('exercise created', exerciseData);
