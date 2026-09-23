@@ -9,16 +9,6 @@ body {
   background-color: #f5f5f5;
 }
 
-.error {
-  font-size: 16px;
-  color: red;
-  margin-bottom: 10px;
-}
-
-#usernameError {
-  display: none
-}
-
 h1 {
   font-weight: bold;
   
