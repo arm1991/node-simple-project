@@ -10,7 +10,7 @@ export function validateUserExercisesLogsQueryParams({
 }: IUserExercisesLogsQueryParams): ErrorMessage | void {
   if (typeof limit === 'number' && limit <= 0) {
     return { message: userValidationErrors.limitInvalid };
-  } else if (Number.isNaN(limit)) {
+  } else if (limit !== null && !Number.isInteger(limit)) {
     return { message: userValidationErrors.limitInvalidFormat };
   }
 

@@ -21,7 +21,7 @@ class ExerciseService {
 
     if (!user) {
       console.log('Exercise validation error :', userValidationErrors.userNotFound);
-      throw ApiError.badRequest(userValidationErrors.userNotFound);
+      throw ApiError.notFound(userValidationErrors.userNotFound);
     }
 
     const ExerciseData = await ExerciseModel.create(exerciseDto);

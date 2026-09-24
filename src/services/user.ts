@@ -29,17 +29,19 @@ class UserService {
 
     if (!user) {
       console.log('User validation error :', userValidationErrors.userNotFound);
-      throw ApiError.badRequest(userValidationErrors.userNotFound);
+      throw ApiError.notFound(userValidationErrors.userNotFound);
     }
 
-    const exerciseData = await ExerciseModel.getUserExercisesLogs(userId, queryParams);
+    const [exerciseData, count] = await Promise.all([
+      ExerciseModel.getUserExercisesLogs(userId, queryParams),
+      ExerciseModel.countUserExercisesLogs(userId, queryParams),
+    ]);
 
-    const userExercisesLogs = new UserExerciseLogResponseDto(user, exerciseData);
-    return userExercisesLogs;
+    return new UserExerciseLogResponseDto(user, exerciseData, count);
   }
 
   async create(username: string): Promise<IUser> {
-    const userValidationError = validateUsername({ username });
+    const userValidationError = validateUsername(username);
 
     if (userValidationError) {
       console.log('User validation error :', userValidationError.message);

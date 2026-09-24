@@ -6,7 +6,7 @@ class ExerciseController {
   async create(req: Request, res: Response, next: NextFunction) {
     try {
       const userId = Number(req.params.id);
-      const { description, duration, date } = req.body;
+      const { description, duration, date } = req.body ?? {};
 
       const exerciseData = await exerciseService.create({
         description,
@@ -16,7 +16,6 @@ class ExerciseController {
       });
 
       res.json(exerciseData);
-      console.log('exercise created', exerciseData);
     } catch (e) {
       next(e);
     }

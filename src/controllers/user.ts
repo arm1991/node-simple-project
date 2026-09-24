@@ -6,7 +6,7 @@ import { parseUserExercisesLogsQueryParams } from '../utils/parseUserExercisesLo
 class UserController {
   async create(req: Request, res: Response, next: NextFunction) {
     try {
-      const { username } = req.body;
+      const { username } = req.body ?? {};
       const userData = await userService.create(username);
 
       res.json(userData);
