@@ -6,6 +6,6 @@ export class UserDto implements CreateUserDTO {
   username: string;
 
   constructor(model: { username: string }) {
-    this.username = model.username;
+    this.username = model.username.trim();
   }
 }

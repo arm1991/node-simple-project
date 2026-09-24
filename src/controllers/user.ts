@@ -1,6 +1,7 @@
 import { userService } from '../services/user.ts';
 
 import type { NextFunction, Request, Response } from 'express';
+import { parseUserExercisesLogsQueryParams } from '../utils/parseUserExercisesLogsQueryParams.ts';
 
 class UserController {
   async create(req: Request, res: Response, next: NextFunction) {
@@ -9,7 +10,6 @@ class UserController {
       const userData = await userService.create(username);
 
       res.json(userData);
-      console.log('user created', username);
     } catch (e) {
       next(e);
     }
@@ -18,8 +18,8 @@ class UserController {
   async getUserExercisesLogs(req: Request, res: Response, next: NextFunction) {
     try {
       const userId = Number(req.params.id);
-      const limit = req.query.limit ? Number(req.query.limit) : null;
-      const userExercisesLogs = await userService.getUserExercisesLogs(userId, limit);
+      const params = parseUserExercisesLogsQueryParams(req.query);
+      const userExercisesLogs = await userService.getUserExercisesLogs(userId, params);
 
       res.json(userExercisesLogs);
     } catch (e) {

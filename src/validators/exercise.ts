@@ -16,7 +16,7 @@ export function validateExercise({
     return { message: exerciseValidationErrors.invalidUserId };
   }
 
-  if (typeof duration !== 'number' || duration <= 0) {
+  if (Number.isNaN(duration) || typeof duration !== 'number' || duration <= 0) {
     return { message: exerciseValidationErrors.invalidDuration };
   }
 

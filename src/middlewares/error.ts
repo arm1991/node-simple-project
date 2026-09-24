@@ -5,7 +5,6 @@ export function errorMiddleware(err: unknown, req: Request, res: Response, next:
   console.log(err);
 
   if (err instanceof ApiError) {
-    console.log('ApiError:: ', err);
     return res.status(err.status).json({ message: err.message, errors: err.errors });
   }
 

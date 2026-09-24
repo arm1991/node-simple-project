@@ -11,7 +11,7 @@ export class ExerciseDto implements CreateExerciseDTO {
   date: string;
 
   constructor(model: CreateExerciseDTO) {
-    this.description = model.description;
+    this.description = model.description.trim();
     this.userId = model.userId;
     this.duration = model.duration;
 

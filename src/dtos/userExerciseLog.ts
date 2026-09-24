@@ -6,10 +6,10 @@ export class UserExerciseLogResponseDto implements IUserExerciseLog {
   logs: IUserExerciseLog['logs'];
   count: IUserExerciseLog['count'];
 
-  constructor(userModel: IUser, exercises: IExercise[] | undefined, limit: number | null) {
+  constructor(userModel: IUser, exercises: IExercise[] | undefined) {
     this.username = userModel.username;
     this.id = userModel.id;
-    this.logs = exercises ? exercises.slice(0, limit ?? exercises.length) : [];
-    this.count = exercises ? exercises.length : 0;
+    this.logs = exercises ?? [];
+    this.count = exercises?.length ?? 0;
   }
 }

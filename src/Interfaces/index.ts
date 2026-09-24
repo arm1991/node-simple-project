@@ -15,3 +15,9 @@ export interface IUserExerciseLog extends IUser {
   logs: IExercise[];
   count: number;
 }
+
+export interface IUserExercisesLogsQueryParams {
+  limit: number | null;
+  from: string | null;
+  to: string | null;
+}
